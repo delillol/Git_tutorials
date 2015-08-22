@@ -1,0 +1,43 @@
+$ git config --global user.name "Steve DeLillo"
+
+delillol@ADMIN-DELILLOL ~
+$ git config --global user.email "delillol@yahoo.com"
+
+delillol@ADMIN-DELILLOL ~
+$ git config --list
+core.symlinks=false
+core.autocrlf=true
+color.diff=auto
+color.status=auto
+color.branch=auto
+color.interactive=true
+pack.packsizelimit=2g
+help.format=html
+http.sslcainfo=/bin/curl-ca-bundle.crt
+sendemail.smtpserver=/bin/msmtp.exe
+diff.astextplain.textconv=astextplain
+rebase.autosquash=true
+user.name=Steve DeLillo
+user.email=delillol@yahoo.com
+push.default=simple
+
+
+delillol@ADMIN-DELILLOL ~
+$ git config user.email
+delillol@yahoo.com
+
+
+delillol@ADMIN-DELILLOL ~
+$ pwd
+/c/Users/IBM_ADMIN
+
+
+delillol@ADMIN-DELILLOL ~
+$ cd Desktop/GIT
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/GIT
+$ git init
+Initialized empty Git repository in c:/Users/IBM_ADMIN/Desktop/GIT/.git/
+
+

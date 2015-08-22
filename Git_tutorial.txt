@@ -41,3 +41,85 @@ $ git init
 Initialized empty Git repository in c:/Users/IBM_ADMIN/Desktop/GIT/.git/
 
 
+-- Put file(s) into /c/Users/IBM_ADMIN/Desktop/GIT   folder
+
+
+-- Add all changes made to project  (basically, using "git add" puts files into staging area before committing)
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git add .
+
+
+-- Now, commit (snapshot of point in time.  Always use -m with message).  Now you can always come back to this commit and fix any errors.
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git commit -m "This is our first commit"
+[master (root-commit) 401cc6e] This is our first commit
+ 1 file changed, 43 insertions(+)
+ create mode 100644 Git_tutorial.txt
+
+
+-- How to view all commits
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git log
+commit 401cc6e5a47461e536502e8606a180925033d421
+Author: Steve DeLillo <delillol@yahoo.com>
+Date:   Fri Aug 21 18:55:29 2015 -0700
+
+    This is our first commit
+
+
+-- How to view commits from a specific user (no need to use full user name)
+$ git log --author="Steve"
+commit 401cc6e5a47461e536502e8606a180925033d421
+Author: Steve DeLillo <delillol@yahoo.com>
+Date:   Fri Aug 21 18:55:29 2015 -0700
+
+    This is our first commit
+
+
+
+----------------------------------------------------------------------------------------------
+Now we make changes to our file(s) and also add new files to the Git folder
+----------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   Git_tutorial.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        Test_second_file.txt					===> New file
+        Test_third_file.txt					===> New file
+
+
+Now add one of the new files to staging area:
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git add Test_second_file.txt
+
+
+Now we can see "Test_second_file.txt" file in staging area
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        new file:   Test_second_file.txt
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   Git_tutorial.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        Test_third_file.txt
+
+
+

@@ -1,3 +1,9 @@
+First , make sure that you have GIT installed on your PC.  I used the executable, Git-1.9.5-preview20150319.exe
+Make certain that you select the option to install Git Bash.
+
+-- Open Git bash  (I had to use Administrator priveledges to change the settings like font, window size, etc.)
+
+
 $ git config --global user.name "Steve DeLillo"
 
 delillol@ADMIN-DELILLOL ~
@@ -49,7 +55,7 @@ Initialized empty Git repository in c:/Users/IBM_ADMIN/Desktop/GIT/.git/
 Add all changes made to project  (basically, using "git add" puts files into staging area before committing):
 ----------------------------------------------------------------------------------------------------------------------------------
 delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
-$ git add .
+$ git add .						==> the . is for whole directory, so everything will get added to staging area.
 
 
 Now, commit (snapshot of point in time.  Always use -m with message).  Now you can always come back to this commit and fix any errors.
@@ -175,5 +181,196 @@ delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
 $ git status
 On branch master
 nothing to commit, working directory clean
+
+
+
+Make changes to Git_tutorial.txt file and see the differences between the committed file (in the repository) and the 
+changed file (in the working dir).  Everything in GREEN will be the changes going into the committed file (not shown, here)
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git diff
+diff --git a/Git_tutorial.txt b/Git_tutorial.txt
+index d8ff83d..0690853 100644
+---   a/Git_tutorial.txt
++++ b/Git_tutorial.txt
+@@ -36,6 +36,8 @@
+
+
+After adding and committing the file(s), again, no difference will be seen:
+------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git add Git_tutorial.txt
+
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git commit -m "Commit Git_tutorial.txt changes, again"
+[master 4985b77] Commit Git_tutorial.txt changes, again
+ 1 file changed, 60 insertions(+), 6 deletions(-)
+
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git status
+On branch master
+nothing to commit, working directory clean
+
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git diff
+
+
+-- "git diff --staged"    compares staging area copy and repository copy
+
+
+------------------------------
+------------------------------
+If we want to delete files
+------------------------------
+------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git rm Test_third_file.txt				==>  This will be delete both local copy and repository copy, but you still need to commit change
+rm 'Test_third_file.txt'
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git commit -m "We deleted the Test_third_file.txt file"
+[master 281b232] We deleted the Test_third_file.txt file
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 Test_third_file.txt
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git status
+On branch master
+nothing to commit, working directory clean
+
+
+
+--------------------
+--------------------
+To rename files
+--------------------
+--------------------
+-- First, I renamed "Test_second_file.txt" to "Test_second_file_rename.txt" just using the window.  This is the hard way.
+   The easier way is shown, later, with "git mv"
+
+
+However, Git sees it like we deleted "Test_second_file.txt" and added a new file, "Test_second_file_rename.txt":
+-------------------------------------------------------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        deleted:    Test_second_file.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        Test_second_file_rename.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+So, you have to add the new file and rm the old file for Git to see as renamed:
+------------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git add Test_second_file_rename.txt
+
+
+------------------------------------------------------
+------------------------------------------------------
+Rename file(s) the easy way using "git mv":
+------------------------------------------------------
+------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git mv Test_second_file_rename.txt Test_second_renamed_with_git.txt
+
+
+You still have to commit it:
+--------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git commit -m "Committing the renamed Test_second_renamed_with_git.txt file"
+[master e313424] Committing the renamed Test_second_renamed_with_git.txt file
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename Test_second_file_rename.txt => Test_second_renamed_with_git.txt (100%)
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git rm Test_second_file.txt
+rm 'Test_second_file.txt'
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        renamed:    Test_second_file.txt -> Test_second_file_rename.txt
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git commit -m "Renamed Test_second_file.txt to Test_second_file_rename.txt"
+[master 1db438b] Renamed Test_second_file.txt to Test_second_file_rename.txt
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename Test_second_file.txt => Test_second_file_rename.txt (100%)
+
+
+---------------
+---------------
+Moving files
+---------------
+---------------
+
+-- Added a directory in the initialized Git folder called, "Folder_for_move"
+
+
+New directory structure looks like this:
+-----------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ ls -al
+total 22
+drwxr-xr-x    6 delillol   Administ      4096 Aug 22 12:15 .
+dr-xr-xr-x     1 delillol   Administ    28672 Aug 22 12:03 ..
+drwxr-xr-x    12 delillol Administ      4096 Aug 22 12:00 .git
+drwxr-xr-x    2 delillol   Administ             0 Aug 22 12:15 Folder_for_move
+-rw-r--r--     1 delillol    Administ       5944 Aug 21 19:27 Git_tutorial.txt
+-rw-r--r--     1 delillol    Administ           49 Aug 21 19:35 Test_second_renamed_with_git.txt
+
+
+The following Git command moves the file to the "Folder_for_move" directory and renames the file, at the same time:
+-------------------------------------------------------------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git mv Test_second_renamed_with_git.txt Folder_for_move/Test_second_moved.txt
+
+
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+        renamed:    Test_second_renamed_with_git.txt -> Folder_for_move/Test_second_moved.txt
+
+
+Now commit the changes:
+--------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git commit -m "We moved Test_second_renamed_with_git.txt to the Folder_for_move directory"
+[master 6ab25fe] We moved Test_second_renamed_with_git.txt to the Folder_for_move directory
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename Test_second_renamed_with_git.txt => Folder_for_move/Test_second_moved.txt (100%)
+
+
+
+-----------------------------------------
+-----------------------------------------
+Committing directly to repository:
+-----------------------------------------
+-----------------------------------------
+
+-- First, change your file.
+
+
+
 
 

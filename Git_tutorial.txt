@@ -371,6 +371,83 @@ Committing directly to repository:
 -- First, change your file.
 
 
+Now you can see the changed file:
+-------------------------------------------
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   Git_tutorial.txt
+
+
+To force a commit, use "-a" option.  This skips the staging area.  Be careful, though.  This will commit 
+EVERY file that has changed in the directory.  Also, only use when you are making simple edits to files.
+-------------------------------------------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/Git (master)
+$ git commit -am "Forced commit of Git_tutorial.txt - no git add"
+[master 39d452c] Forced commit of Git_tutorial.txt - no git add
+ 1 file changed, 198 insertions(+), 1 deletion(-)
+
+
+
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+Fixing a mistake.  Bring a repository copy back to the local workspace:
+----------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------
+ 
+Here, we can see the changed file.  Test_second_moved.txt has some added text that we never wanted to do:
+-----------------------------------------------------------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   Folder_for_move/Test_second_moved.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+Using "git checkout" will bring the one in the repository back to local:
+------------------------------------------------------------------------------------
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git checkout -- Folder_for_move/Test_second_moved.txt
+
+delillol@ADMIN-DELILLOL ~/Desktop/GIT (master)
+$ git status
+On branch master
+nothing to commit, working directory clean
+
+
+
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Unstaging a file because you don't want to commit it:
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+
+If you added a file(s) to a staging area using "git add" and decided that you don't want it there, anymore, you need 
+to bring the staged copy back to the local working directory.
+
+Use "git reset HEAD <file name>" to bring it back to local.  Note:  "git status" will now see this file as modified (as you would expect)
+
+
+
+--------------------------------------------------------------
+--------------------------------------------------------------
+How to get old versions of project from repository:
+--------------------------------------------------------------
+--------------------------------------------------------------
+
+-- Note:  It's important to know that no version gets deleted.  You just make an older version the newest version in the repository
+
+
+
+
 
 
 
